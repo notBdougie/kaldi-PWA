@@ -1,6 +1,11 @@
-// JS Goes here - ES6 supported
-if (window.netlifyIdentity && !window.netlifyIdentity.currentUser()) {
-  window.netlifyIdentity.on('login', () => {
-    document.location.href = '/admin/';
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
   });
 }
